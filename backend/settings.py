@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'weber_schnaittach',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'NAME': 'defaultdb',
+        'USER': 'doadmin',
+        'PASSWORD': 'AVNS_dUTvJ3Vc9jrtQv6s-Wz',
+        'HOST': 'lendware-backend-fra1-65927-do-user-15037238-0.c.db.ondigitalocean.com',
+        'PORT': '25060'
     }
 }
 
