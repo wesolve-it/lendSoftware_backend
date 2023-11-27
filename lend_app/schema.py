@@ -55,6 +55,8 @@ class BookedInput(graphene.InputObjectType):
     email = graphene.String()
     phoneNumber = graphene.String()
     size_id = graphene.Int()
+    street = graphene.String()
+    local = graphene.String()
 
 
 class Query(graphene.ObjectType):
@@ -90,9 +92,11 @@ class CreateBooking(graphene.Mutation):
     last_name = graphene.String()
     phone_number = graphene.String()
     size_id = graphene.Int()
+    local = graphene.String()
+    street = graphene.String()
 
     class Arguments:
-        startDate = graphene.Date()
+        start_date = graphene.Date()
         end_date = graphene.Date()
         booking_date = graphene.Date()
         email = graphene.String()
@@ -100,11 +104,15 @@ class CreateBooking(graphene.Mutation):
         last_name = graphene.String()
         phone_number = graphene.String()
         size_id = graphene.Int()
+        local = graphene.String()
+        street = graphene.String()
 
     @staticmethod
-    def mutate(self, info, startDate, end_date, booking_date, email, first_name, last_name, phone_number, size_id):
-        booking = Booked(startDate=startDate, endDate=end_date, bookingDate=booking_date, email=email,
-                         firstName=first_name, lastName=last_name, phoneNumber=phone_number, size_id=size_id)
+    def mutate(self, info, start_date, end_date, booking_date, email, first_name, last_name, phone_number, size_id,
+               local, street):
+        booking = Booked(startDate=start_date, endDate=end_date, bookingDate=booking_date, email=email,
+                         firstName=first_name, lastName=last_name, phoneNumber=phone_number, size_id=size_id,
+                         local=local, street=street)
         booking.save()
 
         return CreateBooking(
@@ -114,7 +122,9 @@ class CreateBooking(graphene.Mutation):
             booking_date=booking.bookingDate,
             first_name=booking.firstName,
             last_name=booking.lastName,
-            size_id=booking.size_id
+            size_id=booking.size_id,
+            local=booking.local,
+            street=booking.street
         )
 
 
