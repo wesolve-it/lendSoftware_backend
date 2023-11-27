@@ -40,6 +40,8 @@ class Booked(models.Model):
     email = models.CharField(max_length=50, null=True)
     phoneNumber = models.CharField(max_length=20, null=True)
     size = models.ForeignKey('Size', on_delete=models.CASCADE, related_name='object', default=0)
+    street = models.CharField(max_length=70, null=True)
+    local = models.CharField(max_length=70, null=True)
 
     def __str__(self):
         return self.startDate
