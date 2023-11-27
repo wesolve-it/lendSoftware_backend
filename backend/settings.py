@@ -10,9 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import django
 import os
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy
 from pathlib import Path
+import dj_database_url
 from datetime import timedelta
+django.utils.translation.ugettext = gettext
+django.utils.translation.ugettext_lazy = gettext_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -185,6 +191,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GRAPHQL_JWT = {
     "JWT_ALLOW_ANY_CLASSES": [
