@@ -29,6 +29,7 @@ class ArticleInput(graphene.InputObjectType):
     id = graphene.ID()
     name = graphene.String()
     category_id = graphene.Int()
+    description = graphene.String()
 
 
 class CategoryInput(graphene.InputObjectType):

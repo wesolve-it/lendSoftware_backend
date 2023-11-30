@@ -19,6 +19,7 @@ class Article(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     image = models.CharField(null=True, max_length=500)
     sizes = models.ManyToManyField(Size)
+    description = models.CharField(max_length=300, null=True)
 
     def __str__(self):
         return self.name
