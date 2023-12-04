@@ -95,6 +95,7 @@ class CreateBooking(graphene.Mutation):
     size_id = graphene.Int()
     local = graphene.String()
     street = graphene.String()
+    note = graphene.String()
 
     class Arguments:
         start_date = graphene.Date()
@@ -107,13 +108,14 @@ class CreateBooking(graphene.Mutation):
         size_id = graphene.Int()
         local = graphene.String()
         street = graphene.String()
+        note = graphene.String()
 
     @staticmethod
     def mutate(self, info, start_date, end_date, booking_date, email, first_name, last_name, phone_number, size_id,
-               local, street):
+               local, street, note):
         booking = Booked(startDate=start_date, endDate=end_date, bookingDate=booking_date, email=email,
                          firstName=first_name, lastName=last_name, phoneNumber=phone_number, size_id=size_id,
-                         local=local, street=street)
+                         local=local, street=street, note=note)
         booking.save()
 
         return CreateBooking(
@@ -125,7 +127,8 @@ class CreateBooking(graphene.Mutation):
             last_name=booking.lastName,
             size_id=booking.size_id,
             local=booking.local,
-            street=booking.street
+            street=booking.street,
+            note=booking.note
         )
 
 

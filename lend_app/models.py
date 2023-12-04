@@ -43,6 +43,7 @@ class Booked(models.Model):
     size = models.ForeignKey('Size', on_delete=models.CASCADE, related_name='object', default=0)
     street = models.CharField(max_length=70, null=True)
     local = models.CharField(max_length=70, null=True)
+    note = models.TextField(null=True, max_length=300)
 
     def __str__(self):
         return self.startDate
