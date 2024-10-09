@@ -19,10 +19,12 @@ from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
 from django.conf import settings
 from django.conf.urls.static import static
+from lend_app.views import serve_image
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path('media/<path:path>', serve_image, name='serve_image'),
 ]
 
 if settings.DEBUG:
