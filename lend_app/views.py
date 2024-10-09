@@ -12,8 +12,16 @@ def serve_image(request, path):
     if not os.path.exists(image_path):
         raise Http404("Bild nicht gefunden")
 
+    # Bestimme den Content-Type basierend auf der Dateiendung
+    if path.endswith('.png'):
+        content_type = 'image/png'
+    elif path.endswith('.jpg') or path.endswith('.jpeg'):
+        content_type = 'image/jpeg'
+    else:
+        content_type = 'application/octet-stream' # Standard für unbekannte Typen
+
     #Erstelle die Antwort mit den CORS-Headern
-    response = FileResponse(open(image_path, 'rb'), content_type='image/jpeg')
+    response = FileResponse(open(image_path, 'rb'), content_type=content_type)
     response['Access-Control-Allow-Origin'] = '*' # Erlaube alle Ursprünge
     response['Access-Control-Allow-Methods'] = '*' # Erlaube alle Methoden
     response['Access-Control-Allow-Headers'] = '*' # Erlaube alle Header
