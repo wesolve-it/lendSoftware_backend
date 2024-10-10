@@ -3,6 +3,7 @@ from django.http import FileResponse, Http404
 from django.views.decorators.http import require_GET
 from django.conf import settings
 
+
 @require_GET
 def serve_image(request, path):
     # Baue den vollständigen Pfad zur Bilddatei zusammen
@@ -18,12 +19,12 @@ def serve_image(request, path):
     elif path.endswith('.jpg') or path.endswith('.jpeg'):
         content_type = 'image/jpeg'
     else:
-        content_type = 'application/octet-stream' # Standard für unbekannte Typen
+        content_type = 'application/octet-stream'  # Standard für unbekannte Typen
 
-    #Erstelle die Antwort mit den CORS-Headern
+    # Erstelle die Antwort mit den CORS-Headern
     response = FileResponse(open(image_path, 'rb'), content_type=content_type)
-    response['Access-Control-Allow-Origin'] = '*' # Erlaube alle Ursprünge
-    response['Access-Control-Allow-Methods'] = '*' # Erlaube alle Methoden
-    response['Access-Control-Allow-Headers'] = '*' # Erlaube alle Header
+    response['Access-Control-Allow-Origin'] = '*'  # Erlaube alle Ursprünge
+    response['Access-Control-Allow-Methods'] = 'GET, OPTIONS'  # Erlaube bestimmte Methoden
+    response['Access-Control-Allow-Headers'] = 'ngrok-skip-browser-warning, Content-Type'  # Erlaube bestimmte Header
 
     return response

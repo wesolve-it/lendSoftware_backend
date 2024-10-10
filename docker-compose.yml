@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: lendsoftware
+      POSTGRES_USER: lend_user_software
+      POSTGRES_PASSWORD: YfC%L&5GtDM2LhoEPrcU
+    networks:
+      - webnet
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: 'true'
+      DATABASE_URL: postgres://lend_user_software:YfC%L&5GtDM2LhoEPrcU@db:5432/lendsoftware
+    depends_on:
+      - db
+    networks:
+      - webnet
+
+    nginx:
+      image: nginx:latest
+      ports:
+        - "80:80"
+        - "443:443"
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+        - ./certbot/conf:/etc/letsencrypt
+        - ./certbot/www:/var/www/certbot
+      depends_on:
+        - web
+      networks:
+        - webnet
+
+volumes:
+  postgres_data:
+
+networks:
+  webnet:
