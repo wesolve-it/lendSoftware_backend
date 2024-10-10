@@ -23,7 +23,7 @@ from lend_app.views import serve_image
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
     # path('media/<path:path>', serve_image, name='serve_image'),
 ]
 
