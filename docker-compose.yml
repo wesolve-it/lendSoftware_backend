@@ -19,8 +19,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000" # Expose the port for Traefik
     environment:
       DEBUG: 'true'
       DATABASE_URL: postgres://lend_user_software:YfC%L&5GtDM2LhoEPrcU@db:5432/lendsoftware
@@ -28,6 +28,13 @@ services:
       - db
     networks:
       - webnet
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.rule=Host(`202.61.246.221`)"
+      - "traefik.http.routers.web.entrypoints=websecure" # HTTPS entrypoint
+      - "traefik.http.routers.web.tls=true" # Enable TLS
+      - "traefik.http.routers.web.tls.certresolver=myresolver" # Let's Encrypt resolver
+      - "traefik.http.services.web.loadbalancer.server.port=8000" # Port in der Container Umgebung
 
   traefik:
     image: traefik:v2.10
