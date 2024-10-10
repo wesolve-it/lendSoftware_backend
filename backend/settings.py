@@ -122,11 +122,11 @@ AUTH_USER_MODEL = 'accounts.User'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'defaultdb',
-        'USER': 'doadmin',
-        'PASSWORD': 'AVNS_dUTvJ3Vc9jrtQv6s-Wz',
-        'HOST': 'lendware-backend-fra1-65927-do-user-15037238-0.c.db.ondigitalocean.com',
-        'PORT': '25060'
+        'NAME': 'lendsoftware',
+        'USER': 'lend_user_software',
+        'PASSWORD': 'YfC%L&5GtDM2LhoEPrcU',
+        'HOST': 'db',
+        'PORT': '5432'
     }
 }
 
