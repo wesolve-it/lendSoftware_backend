@@ -30,7 +30,7 @@ services:
       - webnet
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web.rule=Host(`v2202410237348289858.powersrv.de`)"
+      - "traefik.http.routers.web.rule=Host(`backend.sportweber-schnaittach.de`)"
       - "traefik.http.routers.web.entrypoints=websecure" # HTTPS entrypoint
       - "traefik.http.routers.web.tls=true" # Enable TLS
       - "traefik.http.routers.web.tls.certresolver=myresolver" # Let's Encrypt resolver
