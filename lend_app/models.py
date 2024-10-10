@@ -35,7 +35,7 @@ class Category(models.Model):
 class Booked(models.Model):
     startDate = models.DateField(null=True)
     endDate = models.DateField(null=True)
-    bookingDate = models.DateField(default=datetime.date.today())
+    bookingDate = models.DateField(default=timezone.now)
     firstName = models.CharField(max_length=50, null=True)
     lastName = models.CharField(max_length=50, null=True)
     email = models.CharField(max_length=50, null=True)
