@@ -46,7 +46,6 @@ services:
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true" # TLS-Challenge aktivieren
       - "--certificatesresolvers.myresolver.acme.email=michael.reinert@wesolve-it.com" # Email für Let's Encrypt
       - "--certificatesresolvers.myresolver.acme.storage=/acme.json" # Speicherort für Zertifikate
-      - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
     ports:
       - "80:80" # HTTP
       - "443:443" # HTTPS
