@@ -45,13 +45,14 @@ services:
       - "--entrypoints.wesecure.address=:443" # HTTPS-Eintragspunkt
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true" # TLS-Challenge aktivieren
       - "--certificatesresolvers.myresolver.acme.email=michael.reinert@wesolve-it.com" # Email für Let's Encrypt
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json" # Speicherort für Zertifikate
+      - "--certificatesresolvers.myresolver.acme.storage=/acme.json" # Speicherort für Zertifikate
     ports:
       - "80:80" # HTTP
       - "443:443" # HTTPS
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock" # Zugang zum Docker-Socket
       - "letsencrypt:/letsencrypt" # Persistente Speicherung für Zertifikate
+      - "./acme.json:/acme.json" # Um ACME-Zertifikate zu speichern
     networks:
       - webnet
 
