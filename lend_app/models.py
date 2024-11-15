@@ -20,6 +20,14 @@ class Article(models.Model):
     image = models.CharField(null=True, max_length=500)
     sizes = models.ManyToManyField(Size)
     description = models.CharField(max_length=300, null=True)
+    driving_profile=models.ForeignKey('DrivingProfile', on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class DrivingProfile(models.Model):
+    name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name

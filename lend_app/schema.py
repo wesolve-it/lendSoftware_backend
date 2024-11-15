@@ -2,7 +2,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from django.db.models import Q
 
-from .models import Article, Category, Size, Booked
+from .models import Article, Category, Size, Booked, DrivingProfile
 
 
 class ArticleType(DjangoObjectType):
@@ -13,6 +13,11 @@ class ArticleType(DjangoObjectType):
 class CategoryType(DjangoObjectType):
     class Meta:
         model = Category
+
+
+class DrivingProfileType(DjangoObjectType):
+    class Meta:
+        model = DrivingProfile
 
 
 class SizeType(DjangoObjectType):
@@ -65,6 +70,7 @@ class Query(graphene.ObjectType):
     categories = graphene.List(CategoryType)
     sizes = graphene.List(SizeType)
     bookings = graphene.List(BookedType)
+    driving_profiles = graphene.List(DrivingProfileType)
 
     @staticmethod
     def resolve_articles(root, info, **kwargs):
@@ -81,6 +87,10 @@ class Query(graphene.ObjectType):
     @staticmethod
     def resolve_bookings(root, info, **kwargs):
         return Booked.objects.all()
+
+    @staticmethod
+    def resolve_driving_profiles(root, info, **kwargs):
+        return DrivingProfile.objects.all()
 
 
 class CreateBooking(graphene.Mutation):
