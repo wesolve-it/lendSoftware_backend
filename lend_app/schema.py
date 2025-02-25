@@ -142,5 +142,28 @@ class CreateBooking(graphene.Mutation):
         )
 
 
+class MarkInvoiceAsDownloaded(graphene.Mutation):
+    id = graphene.Int()
+    is_invoice_downloaded = graphene.Boolean()
+
+    class Arguments:
+        booking_id = graphene.Int()
+
+        @staticmethod
+        def mutate(self, info, booking_id):
+            try:
+                booking = Booked.objects.get(id=booking_id)
+                booking.is_invoice_downloaded = True
+                booking.save()
+
+                return MarkInvoiceAsDownloaded(
+                    id=booking.id,
+                    is_invoice_downloaded=booking.is_invoice_downloaded
+                )
+            except Booked.DoesNotExist:
+                raise Exception("Booking not found")
+
+
 class Mutation(graphene.ObjectType):
     create_booking = CreateBooking.Field()
+    mark_invoice_as_downloaded = MarkInvoiceAsDownloaded.Field()
