@@ -52,7 +52,6 @@ class Booked(models.Model):
     street = models.CharField(max_length=70, null=True)
     local = models.CharField(max_length=70, null=True)
     note = models.TextField(null=True, max_length=300)
-    is_invoice_downloaded = models.BooleanField(default=False)
 
     def __str__(self):
         return self.startDate
