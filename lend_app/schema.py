@@ -93,6 +93,23 @@ class Query(graphene.ObjectType):
         return DrivingProfile.objects.all()
 
 
+class UpdateInvoiceDownloaded(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+
+    booked = graphene.Field(BookedType)
+
+    def mutate(self, info, id):
+        try:
+            booked = Booked.objects.get(pk=id)
+            booked.invoice_downloaded = True
+            booked.save()
+            return UpdateInvoiceDownloaded(booked=booked)
+        except Booked.DoesNotExist:
+            raise Exception("Booked entry not found")
+
+
+
 class CreateBooking(graphene.Mutation):
     id = graphene.Int()
     startDate = graphene.Date()
@@ -144,3 +161,4 @@ class CreateBooking(graphene.Mutation):
 
 class Mutation(graphene.ObjectType):
     create_booking = CreateBooking.Field()
+    update_invoice_downloaded = UpdateInvoiceDownloaded.Field()
