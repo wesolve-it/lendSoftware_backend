@@ -2,4 +2,4 @@
 
 ## Installation
 1. Es wird git, python und docker benötigt
-2. 
+2. Projekt mit docker-compose up --build aufsetzen
